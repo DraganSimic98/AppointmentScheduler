@@ -1,4 +1,4 @@
-﻿using AppointmentScheduler.Models;
+﻿ using AppointmentScheduler.Models;
 using AppointmentScheduler.Models.ViewModels;
 using AppointmentScheduler.Utility;
 using Microsoft.AspNetCore.Identity;
@@ -14,12 +14,14 @@ namespace AppointmentScheduler.Controllers
         SignInManager<ApplicationUser> _signInManager;
         RoleManager<IdentityRole> _roleManager;
 
-        public AccountController(ApplicationDbContext db, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
+        public AccountController(ApplicationDbContext db, UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager, SignInManager<ApplicationUser> signInManager)
         {
             _db = db;
             _userManager = userManager;
-            _signInManager = signInManager;
             _roleManager = roleManager;
+            _signInManager = signInManager;
+          
         }
         public IActionResult Login()
         {
@@ -43,10 +45,11 @@ namespace AppointmentScheduler.Controllers
 
         public async Task<IActionResult> Register()
         {
-            if (!_roleManager.RoleExistsAsync(Helper.Admin).GetAwaiter().GetResult()) {
-               await _roleManager.CreateAsync(new IdentityRole(Helper.Admin));
-                await _roleManager.CreateAsync(new IdentityRole(Helper.Doctor));
+            if (!_roleManager.RoleExistsAsync(Helper.Patient).GetAwaiter().GetResult()) {
                 await _roleManager.CreateAsync(new IdentityRole(Helper.Patient));
+                await _roleManager.CreateAsync(new IdentityRole(Helper.Admin));
+                await _roleManager.CreateAsync(new IdentityRole(Helper.Doctor));
+               
               
             }
             return View();
@@ -80,7 +83,7 @@ namespace AppointmentScheduler.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> LogOff() { 
+        public async Task<IActionResult> Logoff() { 
             await _signInManager.SignOutAsync();
             return RedirectToAction("Login", "Account");
         }
