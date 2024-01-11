@@ -82,10 +82,6 @@ namespace AppointmentScheduler.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Logoff() { 
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Account");
-        }
+
     }
 }
