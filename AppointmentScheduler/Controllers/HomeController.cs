@@ -30,14 +30,7 @@ namespace AppointmentScheduler.Controllers
         {
             return View();
         }
-
-
-        [HttpPost]
-        public async Task<IActionResult> LogOff()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Account");
-        }
+    
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
