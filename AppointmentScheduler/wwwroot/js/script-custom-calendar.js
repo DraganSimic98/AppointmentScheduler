@@ -14,13 +14,15 @@ function InitializeCalendar() {
             selectable: true,
             editable: false,
             select: function (event) {
-                onShowModal(event, null)
+                onShowModal(event, null);
             }
         });
-    } catch (e) {
-    alert(e)}
+    }
+    catch (e) {
+        alert(e);
+    }
 }
 
 function onShowModal(obj, isEventDetail) {
-    $('appointmentInput').modal("show");
+    $("#appointmentInput").modal("show");
 }
