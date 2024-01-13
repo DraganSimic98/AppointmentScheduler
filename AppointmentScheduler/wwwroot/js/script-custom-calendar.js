@@ -5,8 +5,9 @@ $(document).ready(function () {
 function InitializeCalendar() {
     try {
 
-       
-            var calendarEl = document.getElementById('calendar');
+
+        var calendarEl = document.getElementById('calendar');
+        if (calendarEl != null) {
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 headerToolbar: {
@@ -21,7 +22,8 @@ function InitializeCalendar() {
                     onShowModal(event, null);
                 }
             });
-            calendar.render();   
+            calendar.render();
+        }
     }
     catch (e) {
         alert(e);
